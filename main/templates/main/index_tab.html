@@ -1,0 +1,73 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<h4>Таблиця всіх книжок нашої бібліотеки...</h4>
+
+<table class="table">
+
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Назва</th>
+        <th scope="col">Автор</th>
+        <th scope="col">Опис</th>
+        <th scope="col">Кількість</th>
+    </tr>
+    </thead>
+
+<tbody>
+    {% if books %}
+        {% for el in books %}
+        <tr>
+            <th scope="row">{{ el.id }}</th>
+            <td>{{ el.title|truncatechars:15 }}</td>
+            <td>{{ el.author|upper }}</td>
+            <td>{{ el.text|truncatewords:10 }}</td>
+            <td>{{ el.count }}</td>
+            <td>
+                <a type="button" class="btn btn-white btn-sm"
+                   href="book/{{ el.id }}/view">
+<!--                    <b>Подробиці...</b>-->
+                    <img src="https://cdn-icons-png.freepik.com/256/2210/2210317.png?ga=GA1.1.1208672995.1707584817&" width="24" height="24">
+                </a>
+            </td>
+            <td>
+                    <a type="button" class="btn btn-light btn-sm"
+                   href="book/{{ el.id }}/edit">
+                    <img src="https://cdn3.iconfinder.com/data/icons/feather-5/24/edit-512.png" width="24" height="24">
+                    </a>
+            </td>
+             <td>
+                <a type="button" class="btn btn-light btn-sm"
+                   href="book/{{ el.id }}/delete">
+                    <img src="https://cdn.iconscout.com/icon/free/png-512/free-delete-2902143-2411575.png?f=webp&w=256" width="24" height="24">
+                </a>
+            </td>
+<!--            <td>-->
+<!--                <a type="button" class="btn btn-info btn-sm"-->
+<!--                   href="book/{{ el.id }}/edit">-->
+<!--                    <b>Редагувати...</b></a>-->
+<!--            </td>-->
+<!--                       <td>-->
+<!--                <a type="button" class="btn btn-danger btn-sm"-->
+<!--                   href="book/{{ el.id }}/delete">-->
+<!--                    <b>Видалити...</b></a>-->
+<!--            </td>-->
+        </tr>
+        {% endfor %}
+    {% else %}
+        <p>Такі книжки в нашому каталозі відсутні...</p>
+    {% endif %}
+</tbody>
+
+</table>
+
+{% endblock %}
+
+
+
